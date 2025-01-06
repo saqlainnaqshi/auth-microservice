@@ -1,0 +1,26 @@
+{
+  "name": "auth-microservices",
+  "version": "1.0.0",
+  "description": "A modular authentication microservice built with Express.js. Features include secure JWT-based authentication, role-based access control, user registration, login, password reset, and token refresh. Designed for seamless integration with other applications, focusing on scalability and security.",
+  "main": "./src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "auth-microservice"
+  },
+  "author": "Saqlain Naqshi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.3",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
