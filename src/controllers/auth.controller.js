@@ -29,6 +29,7 @@ export const register = async (req, res) => {
             token: token
         })
         logger.info(`User registered: ${email}`)
+
     } catch (error) {
         logger.error(`Error registering user ${error.message}`)
         res.status(500).json({ message: `Error registering user: ${error.message}` })

@@ -24,6 +24,7 @@ export const registerUser = async ({ firstName, lastName, email, password, role,
     return newUser
 }
 
-export const matchedPassword = async (enteredPassword, storedPassword) => {
-    return await bcrypt.compare(enteredPassword, storedPassword)
-}
+
+// export const matchedPassword = async (enteredPassword, storedPassword) => {
+//     return await bcrypt.compare(enteredPassword, storedPassword)
+// }
