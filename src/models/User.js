@@ -26,7 +26,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['user', 'admin', 'superAdmin'],
         default: 'user'
-    }
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const User = mongoose.model('User', userSchema)

@@ -26,3 +26,5 @@ Thumbs.db
 # Build output
 dist/
 build/
+
+hierarchy.txt

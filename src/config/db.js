@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
+import logger from "../utils/logger.js";
 
 const connectDB = async () => {
     try {
         const dbURI = process.env.MONGO_URI;
         if (!dbURI) {
-            console.error('MONGO_URI is not defined');
+            logger.error('MONGO_URI is not defined');
             process.exit(1);
         }
         await mongoose.connect(dbURI)
-        console.log('MongoDB connected')
+        logger.info('MongoDB connected')
 
     } catch (error) {
-        console.error('MongoDB connection error:', error)
+        logger.error('MongoDB connection error:', error)
         process.exit(1)
     }
 }
