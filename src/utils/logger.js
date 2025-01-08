@@ -1,7 +1,7 @@
 import winston from "winston";
 
 const logger = winston.createLogger({
-    level: 'info', //it can be debug , info, warn or error
+    level: 'info',
     format: winston.format.combine(
         winston.format.colorize(),
         winston.format.timestamp(),
