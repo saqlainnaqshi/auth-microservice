@@ -24,7 +24,17 @@ export const registerUser = async ({ firstName, lastName, email, password, role,
     return newUser
 }
 
+export const loginUser = async ({ email, password }) => {
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new Error("User doesn't exist");
+    }
 
-// export const matchedPassword = async (enteredPassword, storedPassword) => {
-//     return await bcrypt.compare(enteredPassword, storedPassword)
-// }
+    const validPassword = await bcrypt.compare(password, user.password)
+
+    if (!validPassword) {
+        throw new Error("Incorrect password");
+    }
+
+    return user
+}
