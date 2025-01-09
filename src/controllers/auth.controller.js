@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { registerUser } from "../services/auth.service.js";
+import { loginUser, registerUser } from "../services/auth.service.js";
 import { sendEmail } from "../utils/email.js";
 import logger from "../utils/logger.js";
 import jwt from 'jsonwebtoken'
@@ -68,5 +68,41 @@ export const verifyEmail = async (req, res) => {
 
     } catch (error) {
         res.status(400).render('emailVerified', { success: false, message: 'Invalid or expired token.' });
+    }
+}
+
+export const login = async (req, res) => {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and Password are required' })
+    }
+
+    try {
+        const user = await loginUser({ email, password })
+
+        // if (!user.isVerified) {
+        //     return res.status(401).json({ message: 'Please verify your email before logging in.' });
+        // }
+
+        const token = jwt.sign(
+            { userId: user._id, email: user.email, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        )
+
+        res.status(200).json({
+            message: 'User Logged in successfully.',
+            user: {
+                email: user.email,
+                role: user.role
+            },
+            token: token
+        })
+        logger.info(`User logged in: ${email}`)
+
+    } catch (error) {
+        logger.error(`Error loggin in user ${error.message}`)
+        res.status(500).json({ message: `Error loggin in user: ${error.message}` })
     }
 }
